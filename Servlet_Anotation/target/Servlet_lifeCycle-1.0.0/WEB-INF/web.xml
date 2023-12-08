@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <servlet>
-        <servlet-name>Hello_Servlet</servlet-name>
-        <servlet-class>lk.ijse.gdse.hello.api.Hello_Servlet</servlet-class>
-<!--        <load-on-startup>10</load-on-startup>-->
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Hello_Servlet</servlet-name>
-        <url-pattern>/text</url-pattern>
-    </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>Hello_Servlet</servlet-name>-->
+<!--        <servlet-class>lk.ijse.gdse.hello.api.Hello_Servlet</servlet-class>-->
+<!--&lt;!&ndash;        <load-on-startup>10</load-on-startup>&ndash;&gt;-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Hello_Servlet</servlet-name>-->
+<!--        <url-pattern>/text</url-pattern>-->
+<!--    </servlet-mapping>-->
 </web-app>
