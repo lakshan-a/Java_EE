@@ -6,7 +6,8 @@
     
     <servlet>
         <servlet-name>Servlet</servlet-name>
-        <servlet-class>lk.ijse.gdse.hello.api.Servlet</servlet-class>  
+        <servlet-class>lk.ijse.gdse.hello.api.Servlet</servlet-class>
+        <load-on-startup>-6</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>Servlet</servlet-name>
