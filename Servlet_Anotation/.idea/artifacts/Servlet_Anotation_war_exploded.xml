@@ -13,6 +13,10 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Servlet_Anotation" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.mysql:mysql-connector-j:8.2.0" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.21.9" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/Servlet_lifeCycle-1.0.0/META-INF/MANIFEST.MF" />
