@@ -7,21 +7,21 @@
     <servlet>
         <servlet-name>Servlet</servlet-name>
         <servlet-class>lk.ijse.gdse.hello.api.Servlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>10</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>Servlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/text</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>Servlet2</servlet-name>
         <servlet-class>lk.ijse.gdse.hello.api.Servlet2</servlet-class>
-        <load-on-startup>2</load-on-startup>
+        <load-on-startup>3</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>Servlet2</servlet-name>
-        <url-pattern>/text</url-pattern>
+        <url-pattern>/text2</url-pattern>
     </servlet-mapping>
     
 </web-app>
