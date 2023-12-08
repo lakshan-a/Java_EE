@@ -34,20 +34,40 @@ public class Hello_Servlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id =req.getParameter("id");
+        String name =req.getParameter("name");
+        String address =req.getParameter("address");
         Connection connection = null;
-        try {
-            
-            String id =req.getParameter("id");
-            String name =req.getParameter("name");
-            String address =req.getParameter("address");
 
+        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
+
+
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection=DriverManager.getConnection(url,username,password);
             PreparedStatement stm =connection.prepareStatement("INSERT INTO customer(id,name,address) VALUE (?,?,?)");
 
+            stm.setString(1,id);
+            stm.setString(2,name);
+            stm.setString(3,address);
+            stm.executeUpdate();
+
 
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            throw new RuntimeException(e);
+
+        }finally {
+            if (connection !=null){
+                try{
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
         }
     }
+
+
 }
+
