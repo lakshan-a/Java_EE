@@ -100,5 +100,42 @@ public class Hello_Servlet extends HttpServlet {
             }
         }
     }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id =req.getParameter("id");
+        String name =req.getParameter("name");
+        String address =req.getParameter("address");
+        Connection connection = null;
+
+        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection=DriverManager.getConnection(url,username,password);
+            PreparedStatement stm =connection.prepareStatement("UPDATE customer SET name=? ,address=? WHERE id=?");
+
+
+            stm.setString(1,name);
+            stm.setString(2,address);
+            stm.setString(3,id);
+            stm.executeUpdate();
+
+
+        } catch (ClassNotFoundException | SQLException e) {
+//            e.printStackTrace();
+            throw new RuntimeException(e);
+
+        }finally {
+            if (connection !=null){
+                try{
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
 }
 
