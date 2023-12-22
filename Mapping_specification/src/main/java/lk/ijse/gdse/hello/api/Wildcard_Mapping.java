@@ -18,7 +18,7 @@ public class Wildcard_Mapping extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         writer.println("<html>" +
                 "<body>" +
-                "<h1>Hello I am Wildcard Mapping </h1>" +
+                "<h1>Hello I am Wildcard Mapping (/*) </h1>" +
                 "</body>" +
                 "</html>");
     }

@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "Empty_String_Mapping" , value = "*.php")
-//@WebServlet(name = "Empty_String_Mapping" , value = "/*.php") ----Invaled-----
-//@WebServlet(name = "Empty_String_Mapping" , value = "abc*.php") ----Invaled-----
-
+@WebServlet(name = "Empty_String_Mapping" , value = "")
 
 public class Empty_String_Mapping extends HttpServlet {
     @Override

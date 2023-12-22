@@ -8,17 +8,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "Extension_Mapping" , value = "*.php")
-//@WebServlet(name = "Empty_String_Mapping" , value = "/*.php") ----Invaled-----
-//@WebServlet(name = "Empty_String_Mapping" , value = "abc*.php") ----Invaled-----
+@WebServlet(name = "Default_Mapping" , value = "/")
 
-public class Extension_Mapping extends HttpServlet {
+
+public class Default_Mapping extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
         writer.println("<html>" +
                 "<body>" +
-                "<h1>Hello I am Extension Mapping (*.php) </h1>" +
+                "<h1>Hello I am Default Mapping ( / ) </h1>" +
                 "</body>" +
                 "</html>");
     }
