@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "Default_Mapping" , value = "/")
-//@WebServlet(name = "Default_Mapping" , value = "/")
 
 
 public class Default_Mapping extends HttpServlet {
