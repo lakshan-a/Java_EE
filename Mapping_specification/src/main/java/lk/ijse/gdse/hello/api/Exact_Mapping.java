@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "Exact_Mapping" , value = "/hello/abc")
+@WebServlet(name = "Exact_Mapping" , value = "/**")
 
 
 public class Exact_Mapping extends HttpServlet {

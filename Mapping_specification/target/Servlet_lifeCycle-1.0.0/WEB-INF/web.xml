@@ -6,7 +6,7 @@
 
 <!--        <servlet>-->
 <!--            <servlet-name>Hello_Mapping</servlet-name>-->
-<!--            <servlet-class>lk.ijse.gdse.hello.api.Hello_Mapping</servlet-class>-->
+<!--            <servlet-class>lk.ijse.gdse.hello.api.Mapping_Specification</servlet-class>-->
 <!--    &lt;!&ndash;        <load-on-startup>10</load-on-startup>&ndash;&gt;-->
 <!--        </servlet>-->
 <!--        <servlet-mapping>-->
