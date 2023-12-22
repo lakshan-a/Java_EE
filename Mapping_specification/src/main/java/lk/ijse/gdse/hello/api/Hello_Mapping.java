@@ -17,6 +17,10 @@ public class Hello_Mapping extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
-        writer.println("<h1> Hello, I am Lakshan </h1>");
+        writer.println("<html>" +
+                            "<body>" +
+                                    "<h1>Hello I am Lakshan </h1>" +
+                            "</body>" +
+                        "</html>");
     }
 }
