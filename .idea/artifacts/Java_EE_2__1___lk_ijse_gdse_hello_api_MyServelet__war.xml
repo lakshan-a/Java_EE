@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Java_EE_2 (1) (lk.ijse.gdse.hello.api.MyServelet):war">
+    <output-path>$PROJECT_DIR$/Hello_Servelet/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Java_EE_2 (1) (lk.ijse.gdse.hello.api.MyServelet)</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Java_EE_2-1.0.0.war">
+      <element id="artifact" artifact-name="Java_EE_2 (1) (lk.ijse.gdse.hello.api.MyServelet):war exploded" />
+    </root>
+  </artifact>
+</component>

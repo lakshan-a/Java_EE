@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Adavance Api.iml" filepath="$PROJECT_DIR$/.idea/Adavance Api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java_EE_2/Java_EE_2.iml" filepath="$PROJECT_DIR$/Java_EE_2/Java_EE_2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Hello_Servelet/Java_EE_2 (1) (lk.ijse.gdse.hello.api.MyServelet).iml" filepath="$PROJECT_DIR$/Hello_Servelet/Java_EE_2 (1) (lk.ijse.gdse.hello.api.MyServelet).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Servlet_Anotation/Servlet_lifeCycle.iml" filepath="$PROJECT_DIR$/Servlet_Anotation/Servlet_lifeCycle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Servlet_lifeCycle/Servlet_lifeCycle (1).iml" filepath="$PROJECT_DIR$/Servlet_lifeCycle/Servlet_lifeCycle (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java_EE/hello-java-ee.iml" filepath="$PROJECT_DIR$/Java_EE/hello-java-ee.iml" />
+    </modules>
+  </component>
+</project>
