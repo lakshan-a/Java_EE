@@ -32,23 +32,22 @@ public class Form_Action extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("doGet()");
+//        System.out.println("doGet()");
+//
+//        String id =req.getParameter("custId");
+//        String name =req.getParameter("cusName");
+//        String address =req.getParameter("cusAddress");
+////        String salary =req.getParameter("cusSalary");
+//
+//        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
 
-        String id =req.getParameter("custId");
-        String name =req.getParameter("cusName");
-        String address =req.getParameter("cusAddress");
-//        String salary =req.getParameter("cusSalary");
+        String id =req.getParameter("id");
+        String name =req.getParameter("name");
+        String address =req.getParameter("address");
+        Connection connection = null;
 
         System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
 
-//        String id =req.getParameter("id");
-//        String name =req.getParameter("name");
-//        String address =req.getParameter("address");
-//        String salary =req.getParameter("salary");
-//        Connection connection = null;
-//
-//        System.out.printf("id=%s, name=%s, address=%s, salary=%s\n ", id, name, address,salary);
-//
 
 //        try {
 //            Class.forName("com.mysql.cj.jdbc.Driver");
@@ -81,7 +80,7 @@ public class Form_Action extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
-
+        PrintWriter writer =resp.getWriter();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -91,19 +90,18 @@ public class Form_Action extends HttpServlet {
 
             String jsonArray = "";
 
-
             while (res.next()){
                 String id = res.getString("id");
                 String name = res.getString("name");
                 String address = res.getString("address");
                 System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
-                String jsonObject = "{\" id \": \""+ id +"\","+ name + "\","+"\" address \":\""+ address + "\"}";
+                String jsonObject = "{\" id \": \""+ "\" name \":\""+ name + "\","+"\" address \":\""+ address + "\"}";
                 jsonArray += jsonObject + ",";
-
             }
-            jsonArray = "["+ jsonArray.substring(0,jsonArray.length()-1) + "]";
-            System.out.println(jsonArray);
 
+            jsonArray = "["+ jsonArray.substring(0,jsonArray.length()-1) + "]";
+            writer.write(jsonArray);
+            resp.setContentType("application/json");
 
         } catch (ClassNotFoundException | SQLException e) {
 //            e.printStackTrace();
