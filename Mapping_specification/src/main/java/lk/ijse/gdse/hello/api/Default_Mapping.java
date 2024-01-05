@@ -15,10 +15,6 @@ public class Default_Mapping extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
-        writer.println("<html>" +
-                "<body>" +
-                "<h1>Hello I am Default Mapping ( / ) </h1>" +
-                "</body>" +
-                "</html>");
+        writer.println("<h1>Hello I am Default Mapping ( / ) </h1>");
     }
 }
