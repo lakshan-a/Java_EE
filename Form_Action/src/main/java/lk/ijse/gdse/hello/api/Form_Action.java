@@ -9,12 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.io.PrintWriter;
+import java.sql.*;
 
-@WebServlet(name = "Customer" , urlPatterns = "/Customer", loadOnStartup = 1, initParams = {
+@WebServlet(name = "customer" , urlPatterns = "/customer", loadOnStartup = 1, initParams = {
         @WebInitParam(name = "username" , value = "root"),
         @WebInitParam(name = "password" , value = "12345"),
         @WebInitParam(name = "url" , value = "jdbc:mysql://localhost:3306/gdse66_hello")
@@ -33,24 +31,34 @@ public class Form_Action extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id =req.getParameter("id");
-        String name =req.getParameter("name");
-        String address =req.getParameter("address");
-        String salary =req.getParameter("salary");
-        Connection connection = null;
 
-        System.out.printf("id=%s, name=%s, address=%s, salary=%s\n ", id, name, address,salary);
+        System.out.println("doGet()");
 
+        String id =req.getParameter("custId");
+        String name =req.getParameter("cusName");
+        String address =req.getParameter("cusAddress");
+//        String salary =req.getParameter("cusSalary");
+
+        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
+
+//        String id =req.getParameter("id");
+//        String name =req.getParameter("name");
+//        String address =req.getParameter("address");
+//        String salary =req.getParameter("salary");
+//        Connection connection = null;
+//
+//        System.out.printf("id=%s, name=%s, address=%s, salary=%s\n ", id, name, address,salary);
+//
 
 //        try {
 //            Class.forName("com.mysql.cj.jdbc.Driver");
 //            connection= DriverManager.getConnection(url,username,password);
-//            PreparedStatement stm =connection.prepareStatement("INSERT INTO customer(id,name,address,salary) VALUE (?,?,?,?)");
+//            PreparedStatement stm =connection.prepareStatement("INSERT INTO customer(id,name,address) VALUE (?,?,?)");
 //
 //            stm.setString(1,id);
 //            stm.setString(2,name);
 //            stm.setString(3,address);
-//            stm.setString(4,salary);
+////            stm.setString(4,salary);
 //            stm.executeUpdate();
 //
 //
@@ -72,7 +80,44 @@ public class Form_Action extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println();
+        Connection connection = null;
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection=DriverManager.getConnection(url,username,password);
+            PreparedStatement stm =connection.prepareStatement("SELECT * FROM customer");
+            ResultSet res = stm.executeQuery();
+
+            String jsonArray = "";
+
+
+            while (res.next()){
+                String id = res.getString("id");
+                String name = res.getString("name");
+                String address = res.getString("address");
+                System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
+                String jsonObject = "{\" id \": \""+ id +"\","+ name + "\","+"\" address \":\""+ address + "\"}";
+                jsonArray += jsonObject + ",";
+
+            }
+            jsonArray = "["+ jsonArray.substring(0,jsonArray.length()-1) + "]";
+            System.out.println(jsonArray);
+
+
+        } catch (ClassNotFoundException | SQLException e) {
+//            e.printStackTrace();
+            throw new RuntimeException(e);
+
+        }finally {
+            if (connection !=null){
+                try{
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
 
 
     }

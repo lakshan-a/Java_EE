@@ -25,29 +25,29 @@
 
             <div>
 
-                <form action="http://localhost:8081/app/Customer" method="post">
+                <form action="customer" method="post" enctype="text/plain">
 
                     <h2 style="color: black" class="text-center m-4">Customer Registration</h2>
 
                     <div class="mb-2">
                         <label for="id" class="form-label" style="color: black">Customer ID :</label>
-                        <input type="id" class="form-control" id="id" name="custId">
+                        <input type="id" class="form-control" id="id" placeholder="C001" name="custId">
                     </div>
 
                     <div class="mb-2">
                         <label for="name" class="form-label" style="color: black">Customer Name :</label>
-                        <input type="name" class="form-control" id="name" name="cusName">
+                        <input type="name" class="form-control" id="name" placeholder="lakshan" name="cusName">
                     </div>
 
                     <div class="mb-2">
                         <label for="address" class="form-label" style="color: black">Customer Address :</label>
-                        <input type="address" class="form-control" id="address" name="cusAddress">
+                        <input type="address" class="form-control" id="address" placeholder="matara" name="cusAddress">
                     </div>
 
-                    <div class="mb-2">
-                        <label for="salary" class="form-label" style="color: black">Customer Salary : </label>
-                        <input type="salary" class="form-control" id="salary" name="cusSalary">
-                    </div>
+<!--                    <div class="mb-2">-->
+<!--                        <label for="salary" class="form-label" style="color: black">Customer Salary : </label>-->
+<!--                        <input type="salary" class="form-control" id="salary" placeholder="1000.00" name="cusSalary">-->
+<!--                    </div>-->
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end my-4">
                         <button class="btn btn-outline-primary" formmethod="post">Save</button>
