@@ -75,7 +75,7 @@ public class Form_Action extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+/*
         Connection connection = null;
 
 //        String id =req.getParameter("id");
@@ -122,24 +122,7 @@ public class Form_Action extends HttpServlet {
                     throwables.printStackTrace();
                 }
             }
-        }
-
-
-    }
-
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id =req.getParameter("id");
-        String name =req.getParameter("name");
-        String address =req.getParameter("address");
-        Connection connection = null;
-
-        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        }*/
 
         JsonArrayBuilder list = Json.createArrayBuilder();
 
@@ -185,6 +168,68 @@ public class Form_Action extends HttpServlet {
                 }
             }
         }
+
+
+    }
+
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id =req.getParameter("id");
+        String name =req.getParameter("name");
+        String address =req.getParameter("address");
+        Connection connection = null;
+
+        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+//        JsonArrayBuilder list = Json.createArrayBuilder();
+//
+//
+//        Connection connection = null;
+//
+//
+//        PrintWriter writer =resp.getWriter();
+//
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            connection=DriverManager.getConnection(url,username,password);
+//            PreparedStatement stm =connection.prepareStatement("SELECT * FROM customer");
+//            ResultSet res = stm.executeQuery();
+//
+//            String jsonArray = "";
+//
+//            while (res.next()){
+//
+//                JsonObjectBuilder builder = Json.createObjectBuilder();
+//                builder.add("id",res.getString(1));
+//                builder.add("name",res.getString(2));
+//                builder.add("address",res.getString(3));
+//
+//                list.add(builder.build());
+//
+//            }
+//
+//
+//            resp.setContentType("application/json");
+//            resp.getWriter().println(list.build());
+//
+//        } catch (ClassNotFoundException | SQLException e) {
+////            e.printStackTrace();
+//            throw new RuntimeException(e);
+//
+//        }finally {
+//            if (connection !=null){
+//                try{
+//                    connection.close();
+//                } catch (SQLException throwables) {
+//                    throwables.printStackTrace();
+//                }
+//            }
+//        }
 
 
 
