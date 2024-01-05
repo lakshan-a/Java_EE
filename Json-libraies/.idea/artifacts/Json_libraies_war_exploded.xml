@@ -14,8 +14,8 @@
           <element id="module-output" name="Json-libraies" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: jakarta.json:jakarta.json-api:2.1.3" />
           <element id="library" level="project" name="Maven: org.eclipse.parsson:parsson:1.1.5" />
+          <element id="library" level="project" name="Maven: jakarta.json:jakarta.json-api:2.1.3" />
           <element id="library" level="project" name="Maven: com.mysql:mysql-connector-j:8.2.0" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.21.9" />
         </element>
