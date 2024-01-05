@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Form_Action:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Form_Action</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Form_Action-1.0.0.war">
+      <element id="artifact" artifact-name="Form_Action:war exploded" />
+    </root>
+  </artifact>
+</component>
