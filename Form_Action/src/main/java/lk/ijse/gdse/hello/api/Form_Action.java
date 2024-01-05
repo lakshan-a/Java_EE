@@ -32,15 +32,6 @@ public class Form_Action extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        System.out.println("doGet()");
-//
-//        String id =req.getParameter("custId");
-//        String name =req.getParameter("cusName");
-//        String address =req.getParameter("cusAddress");
-////        String salary =req.getParameter("cusSalary");
-//
-//        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
-
         String id =req.getParameter("id");
         String name =req.getParameter("name");
         String address =req.getParameter("address");
@@ -49,37 +40,46 @@ public class Form_Action extends HttpServlet {
         System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
 
 
-//        try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            connection= DriverManager.getConnection(url,username,password);
-//            PreparedStatement stm =connection.prepareStatement("INSERT INTO customer(id,name,address) VALUE (?,?,?)");
-//
-//            stm.setString(1,id);
-//            stm.setString(2,name);
-//            stm.setString(3,address);
-////            stm.setString(4,salary);
-//            stm.executeUpdate();
-//
-//
-//        } catch (ClassNotFoundException | SQLException e) {
-////            e.printStackTrace();
-//            throw new RuntimeException(e);
-//
-//        }finally {
-//            if (connection !=null){
-//                try{
-//                    connection.close();
-//                } catch (SQLException throwables) {
-//                    throwables.printStackTrace();
-//                }
-//            }
-//        }
+        /*        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection= DriverManager.getConnection(url,username,password);
+            PreparedStatement stm =connection.prepareStatement("INSERT INTO customer(id,name,address) VALUE (?,?,?)");
+
+            stm.setString(1,id);
+            stm.setString(2,name);
+            stm.setString(3,address);
+//            stm.setString(4,salary);
+            stm.executeUpdate();
+
+
+        } catch (ClassNotFoundException | SQLException e) {
+//            e.printStackTrace();
+            throw new RuntimeException(e);
+
+        }finally {
+            if (connection !=null){
+                try{
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }*/
+
     }
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String id =req.getParameter("id");
+        String name =req.getParameter("name");
+        String address =req.getParameter("address");
         Connection connection = null;
+
+        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
+
+     /*   Connection connection = null;
         PrintWriter writer =resp.getWriter();
 
         try {
@@ -115,8 +115,19 @@ public class Form_Action extends HttpServlet {
                     throwables.printStackTrace();
                 }
             }
-        }
+        }*/
 
 
+    }
+
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id =req.getParameter("id");
+        String name =req.getParameter("name");
+        String address =req.getParameter("address");
+        Connection connection = null;
+
+        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
     }
 }
