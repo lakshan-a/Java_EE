@@ -1,11 +1,9 @@
 package lk.ijse.gdse.hello.api;
 
 import com.sun.xml.internal.ws.transport.http.HttpAdapter;
-import jakarta.json.Json;
-import jakarta.json.JsonArrayBuilder;
-import jakarta.json.JsonObject;
-import jakarta.json.JsonObjectBuilder;
+import jakarta.json.*;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -30,211 +28,111 @@ public class Form_Action extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        super.init();
+        /*ServletConfig is used to get configuration information such as database url, mysql username and password*/
+        ServletConfig sc = getServletConfig();
+        username = sc.getInitParameter("username");
+        password = sc.getInitParameter("password");
+        url = sc.getInitParameter("url");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String id =req.getParameter("id");
-        String name =req.getParameter("name");
-        String address =req.getParameter("address");
         Connection connection = null;
 
-        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
+        JsonReader reader = Json.createReader(req.getReader());
+        JsonObject jsonObject = reader.readObject();
+        String id = jsonObject.getString("id");
+        String name = jsonObject.getString("name");
+        String address = jsonObject.getString("address");
 
+        /*catch request parameter as a String*/
+        /*String id = req.getParameter("id");
+        String name = req.getParameter("name");
+        String address = req.getParameter("address");*/
 
-        /*        try {
+        System.out.printf("id=%s, name=%s, address=%s\n", id,name,address);
+
+        /*create a database connection and save data in database*/
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection= DriverManager.getConnection(url,username,password);
-            PreparedStatement stm =connection.prepareStatement("INSERT INTO customer(id,name,address) VALUE (?,?,?)");
+            connection = DriverManager.getConnection(url,username,password);
+            PreparedStatement stm = connection.prepareStatement("INSERT INTO customer(id, name, address) VALUES (?,?,?)");
 
             stm.setString(1,id);
-            stm.setString(2,name);
-            stm.setString(3,address);
-//            stm.setString(4,salary);
+            stm.setString(2, name);
+            stm.setString(3, address);
+
             stm.executeUpdate();
-
-
         } catch (ClassNotFoundException | SQLException e) {
-//            e.printStackTrace();
             throw new RuntimeException(e);
-
         }finally {
-            if (connection !=null){
-                try{
+            if(connection !=null) {
+                try {
                     connection.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-        }*/
-
-    }
-
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-/*
-        Connection connection = null;
-
-//        String id =req.getParameter("id");
-//        String name =req.getParameter("name");
-//        String address =req.getParameter("address");
-//        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
-
-
-        PrintWriter writer =resp.getWriter();
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection(url,username,password);
-            PreparedStatement stm =connection.prepareStatement("SELECT * FROM customer");
-            ResultSet res = stm.executeQuery();
-
-            String jsonArray = "";
-
-            while (res.next()){
-                String id = res.getString("id");
-                String name = res.getString("name");
-                String address = res.getString("address");
-                System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
-                String jsonObject = "{\" id \": \""+ "\" name \":\""+ name + "\","+"\" address \":\""+ address + "\"}";
-                jsonArray += jsonObject + ",";
-
-
-
-            }
-
-            jsonArray = "["+ jsonArray.substring(0,jsonArray.length()-1) + "]";
-            writer.write(jsonArray);
-            resp.setContentType("application/json");
-
-        } catch (ClassNotFoundException | SQLException e) {
-//            e.printStackTrace();
-            throw new RuntimeException(e);
-
-        }finally {
-            if (connection !=null){
-                try{
-                    connection.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-        }*/
-
-        JsonArrayBuilder list = Json.createArrayBuilder();
-
-
-        Connection connection = null;
-
-
-        PrintWriter writer =resp.getWriter();
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection(url,username,password);
-            PreparedStatement stm =connection.prepareStatement("SELECT * FROM customer");
-            ResultSet res = stm.executeQuery();
-
-            String jsonArray = "";
-
-            while (res.next()){
-
-                JsonObjectBuilder builder = Json.createObjectBuilder();
-                builder.add("id",res.getString(1));
-                builder.add("name",res.getString(2));
-                builder.add("address",res.getString(3));
-
-                list.add(builder.build());
-
-            }
-
-
-            resp.setContentType("application/json");
-            resp.getWriter().println(list.build());
-
-        } catch (ClassNotFoundException | SQLException e) {
-//            e.printStackTrace();
-            throw new RuntimeException(e);
-
-        }finally {
-            if (connection !=null){
-                try{
-                    connection.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
-
-
     }
 
-
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id =req.getParameter("id");
-        String name =req.getParameter("name");
-        String address =req.getParameter("address");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
 
-        System.out.printf("id=%s, name=%s, address=%s\n ", id, name, address);
-    }
+        /*create a database connection and fetch data in database*/
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url,username,password);
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM customer");
+            ResultSet rst = stm.executeQuery();
 
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            /*String jsonArray = "";*/
 
-//        JsonArrayBuilder list = Json.createArrayBuilder();
-//
-//
-//        Connection connection = null;
-//
-//
-//        PrintWriter writer =resp.getWriter();
-//
-//        try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            connection=DriverManager.getConnection(url,username,password);
-//            PreparedStatement stm =connection.prepareStatement("SELECT * FROM customer");
-//            ResultSet res = stm.executeQuery();
-//
-//            String jsonArray = "";
-//
-//            while (res.next()){
-//
-//                JsonObjectBuilder builder = Json.createObjectBuilder();
-//                builder.add("id",res.getString(1));
-//                builder.add("name",res.getString(2));
-//                builder.add("address",res.getString(3));
-//
-//                list.add(builder.build());
-//
-//            }
-//
-//
-//            resp.setContentType("application/json");
-//            resp.getWriter().println(list.build());
-//
-//        } catch (ClassNotFoundException | SQLException e) {
-////            e.printStackTrace();
-//            throw new RuntimeException(e);
-//
-//        }finally {
-//            if (connection !=null){
-//                try{
-//                    connection.close();
-//                } catch (SQLException throwables) {
-//                    throwables.printStackTrace();
-//                }
-//            }
-//        }
+            JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+
+            while (rst.next()){
+                String id = rst.getString("id");
+                String name = rst.getString("name");
+                String address = rst.getString("address");
+                System.out.printf("id=%s, name=%s, address=%s\n",id,name,address);
+
+                /*String customer = String.format("id=%s, name=%s, address=%s\n", id, name, address);
+                writer.write(customer); // write all customers as the text in response*/
+
+                /*Example for Json object format: {"id":C001, "name":Kasun, "address":Galle}*/
+                /*String jsonObject = "{ \"id\": \"" + id + "\"," + "\"name\":\""+ name+ "\"," + "\"address\":\"" + address + "\"}"; //convert one customer record to JSON object format
+                jsonArray += jsonObject + ",";*/
+
+                JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+                objectBuilder.add("id",id);
+                objectBuilder.add("name",name);
+                objectBuilder.add("address",address);
+                JsonObject customerJsonObject = objectBuilder.build(); //create JSON objects for each customer
 
 
+                arrayBuilder.add(customerJsonObject); // add each customer into JSON array
+            }
 
+            /*jsonArray = "[" + jsonArray.substring(0,jsonArray.length()-1) + "]"; //create JSON array format to add all customers
 
+            resp.getWriter().write(jsonArray); //write JSON array format in response*/
 
+            JsonArray jsonArray = arrayBuilder.build();
+            resp.getWriter().write(jsonArray.toString()); //write JSON array in response
 
+            resp.setContentType("application/json"); //set the MIME type of the content of the response (Thus, add response header called "Content-Type")
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            if(connection !=null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 }
