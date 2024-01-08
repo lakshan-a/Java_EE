@@ -32,9 +32,9 @@ public class Json_Libraries extends HttpServlet {
 
         /*----------using JSON-P library----------*/
 
-        JsonReader jsonReader = Json.createReader(req.getReader());
-        JsonObject jsonObject = jsonReader.readObject();
-        System.out.println(jsonObject);
+//        JsonReader jsonReader = Json.createReader(req.getReader());
+//        JsonObject jsonObject = jsonReader.readObject();
+//        System.out.println(jsonObject);
 
         /*-----------write json-----------*/
 
