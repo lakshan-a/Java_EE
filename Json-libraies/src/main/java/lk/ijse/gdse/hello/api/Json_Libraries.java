@@ -20,30 +20,37 @@ public class Json_Libraries extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        /*-------------without json library-----------*/
-
-       /* BufferedReader reader = req.getReader();
+        /* ----------------------- Read JSON--------------------*/
+        /* without json libraries */
+        /*BufferedReader reader = req.getReader();
         String line;
         String json = "";
-        while ((line = reader.readLine()) !=null){
+        while((line = reader.readLine()) != null ){
             json += line + "\n";
         }
-            System.out.println(json);*/
+        System.out.println(json);*/
 
-        /*----------using JSON-P library----------*/
 
-//        JsonReader jsonReader = Json.createReader(req.getReader());
-//        JsonObject jsonObject = jsonReader.readObject();
-//        System.out.println(jsonObject);
+        /* using JSON-P library */
+        /*JsonReader reader = Json.createReader(req.getReader());
+        JsonObject jsonObject = reader.readObject();
+        System.out.println(jsonObject);*/
 
-        /*-----------write json-----------*/
+        /* ----------------------- Write JSON--------------------*/
 
-        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-        objectBuilder.add("id","C001");
-        objectBuilder.add("name","Lakshan");
-        objectBuilder.add("address","Matara");
-        JsonObject jsonObject = objectBuilder.build();
+        /* using JSON-P library */
+        /*JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+
+        objectBuilder.add("id", "C001");
+        objectBuilder.add("name", "Kasun");
+        objectBuilder.add("address", "Galle");
+        JsonObject jsonObject = objectBuilder.build();*/
+
+        JsonObject jsonObject = Json.createObjectBuilder()
+                .add("id", "C001")
+                .add("name", "Kasun")
+                .add("address", "Galle").build();
+
         resp.getWriter().write(jsonObject.toString());
-
     }
 }
