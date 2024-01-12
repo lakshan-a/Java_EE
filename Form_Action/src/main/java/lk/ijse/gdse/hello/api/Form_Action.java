@@ -114,7 +114,7 @@ public class Form_Action extends HttpServlet {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello", "root", "1234");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello", "root", "12345");
             PreparedStatement stn = connection.prepareStatement("DELETE FROM customer WHERE id=?");
 
             stn.setString(1, id);
@@ -144,7 +144,7 @@ public class Form_Action extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection =   DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello","root","1234");
+            connection =   DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello","root","12345");
             PreparedStatement stn = connection.prepareStatement(" UPDATE customer SET name=?,address=? WHERE id=?");
 
 
