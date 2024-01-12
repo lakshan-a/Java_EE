@@ -119,25 +119,20 @@ public class Form_Action extends HttpServlet {
         Connection connection = null;
 
         String id = req.getParameter("id");
-        String name = req.getParameter("name");
-        String address = req.getParameter("address");
+
+        System.out.printf("id=%s\n", id);
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello", "root", "12345");
-            PreparedStatement stn = connection.prepareStatement("INSERT INTO customer(id,name,address) VALUES(?,?,?)");
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello", "root", "1234");
+            PreparedStatement stn = connection.prepareStatement("DELETE FROM customer WHERE id=?");
 
-            stn.setString(1,id);
-            stn.setString(2,name);
-            stn.setString(3,address);
-
+            stn.setString(1, id);
             stn.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }finally {
+        } finally {
             if (connection != null) {
                 try {
                     connection.close();
@@ -147,4 +142,6 @@ public class Form_Action extends HttpServlet {
             }
         }
     }
+
+
 }
