@@ -21,7 +21,7 @@ public class Form_Action extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello", "root", "1234");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello", "root", "12345");
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT *from customer");
             ResultSet set = preparedStatement.executeQuery();
 
@@ -107,10 +107,44 @@ public class Form_Action extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+//        Connection connection = null;
+//
+//        String id = req.getParameter("id");
+//        String name = req.getParameter("name");
+//        String address = req.getParameter("address");
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
 
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String address = req.getParameter("address");
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello", "root", "12345");
+            PreparedStatement stn = connection.prepareStatement("INSERT INTO customer(id,name,address) VALUES(?,?,?)");
+
+            stn.setString(1,id);
+            stn.setString(2,name);
+            stn.setString(3,address);
+
+            stn.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
