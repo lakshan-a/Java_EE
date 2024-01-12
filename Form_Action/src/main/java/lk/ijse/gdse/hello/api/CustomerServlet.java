@@ -128,7 +128,9 @@ public class CustomerServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
 
-        String id = req.getParameter("id");
+        Jsonb jsonb = JsonbBuilder.create();
+        CustomerDto customerDto =jsonb.fromJson(req.getReader(),CustomerDto.class);
+        String id = customerDto.getId();
 
         System.out.printf("id=%s\n", id);
 
