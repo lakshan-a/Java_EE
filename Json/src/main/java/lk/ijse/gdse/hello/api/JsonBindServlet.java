@@ -1,5 +1,7 @@
 package lk.ijse.gdse.hello.api;
 
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 import lk.ijse.gdse.hello.model.Student;
 
 import javax.servlet.ServletException;
@@ -18,6 +20,9 @@ public class JsonBindServlet extends HttpServlet {
         /*java Object ------>Json*/
 
         Student s1 = new Student("S001","lakshan",18);
+
+        Jsonb jsonb =JsonbBuilder.create();
+        
 
 
 
