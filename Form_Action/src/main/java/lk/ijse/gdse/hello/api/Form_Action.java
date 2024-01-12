@@ -136,23 +136,28 @@ public class Form_Action extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
-
         String id = req.getParameter("id");
+        String name = req.getParameter("name");
+        String address = req.getParameter("address");
 
-        System.out.printf("id=%s\n", id);
+
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello", "root", "1234");
-            PreparedStatement stn = connection.prepareStatement("DELETE FROM customer WHERE id=?");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection =   DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello","root","1234");
+            PreparedStatement stn = connection.prepareStatement(" UPDATE customer SET name=?,address=? WHERE id=?");
 
-            stn.setString(1, id);
+
+            stn.setString(1,name);
+            stn.setString(2,address);
+            stn.setString(3,id);
+
             stn.executeUpdate();
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
+        }finally {
+            if(connection !=null){
                 try {
                     connection.close();
                 } catch (SQLException e) {
@@ -160,6 +165,7 @@ public class Form_Action extends HttpServlet {
                 }
             }
         }
+
     }
 
 
