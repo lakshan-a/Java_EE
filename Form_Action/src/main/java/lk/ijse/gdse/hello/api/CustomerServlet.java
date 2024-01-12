@@ -61,8 +61,12 @@ public class CustomerServlet extends HttpServlet {
 
         if (id == null || !id.matches("c\\d{3}")){
             resp.getWriter().write("id is empty or id is invalid");
-        }else {
-            resp.getWriter().write("");
+            return;
+        }else if(name == null || !name.matches("[A-Za-z]+")){
+            resp.getWriter().write("name is empty or name is invalid");
+            return;
+        }else if(address == null || !address.matches("[A-Za-z]+")){
+            resp.getWriter().write("address is empty or address is invalid");
         }
 
         try {
