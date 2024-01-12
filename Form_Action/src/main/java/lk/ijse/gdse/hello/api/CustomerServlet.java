@@ -177,6 +177,15 @@ public class CustomerServlet extends HttpServlet {
         String name = customerDto.getName();
         String address = customerDto.getAddress();
 
+        if (id == null || !id.matches("c\\d{3}")){
+            resp.getWriter().write("id is empty or id is invalid");
+            return;
+        }else if(name == null || !name.matches("[A-Za-z]+")){
+            resp.getWriter().write("name is empty or name is invalid");
+            return;
+        }else if(address == null || !address.matches("[A-Za-z]+")){
+            resp.getWriter().write("address is empty or address is invalid");
+        }
 
 
         try {
