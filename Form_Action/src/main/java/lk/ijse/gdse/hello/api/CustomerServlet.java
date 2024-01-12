@@ -49,11 +49,21 @@ public class CustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
 
+        Jsonb jsonb = JsonbBuilder.create();
+        CustomerDto customerDto =jsonb.fromJson(req.getReader(),CustomerDto.class);
+        String id = customerDto.getId();
+        String name = customerDto.getName();
+        String address = customerDto.getAddress();
 
+//        String id = req.getParameter("id");
+//        String name = req.getParameter("name");
+//        String address = req.getParameter("address");
 
-        String id = req.getParameter("id");
-        String name = req.getParameter("name");
-        String address = req.getParameter("address");
+        if (id == null || !id.matches("c\\d{3}")){
+            resp.getWriter().write("id is empty or id is invalid");
+        }else {
+            resp.getWriter().write("");
+        }
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -64,7 +74,11 @@ public class CustomerServlet extends HttpServlet {
             stn.setString(2,name);
             stn.setString(3,address);
 
-            stn.executeUpdate();
+            if (stn.executeUpdate() !=0){
+                resp.getWriter().write("Customer Save Success");
+            }else {
+                resp.getWriter().write("Failed to save Customer");
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,7 +138,12 @@ public class CustomerServlet extends HttpServlet {
             PreparedStatement stn = connection.prepareStatement("DELETE FROM customer WHERE id=?");
 
             stn.setString(1, id);
-            stn.executeUpdate();
+
+            if (stn.executeUpdate() !=0){
+                resp.getWriter().write("Customer Delete Success");
+            }else {
+                resp.getWriter().write("Failed to Delete Customer");
+            }
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -164,7 +183,11 @@ public class CustomerServlet extends HttpServlet {
             stn.setString(2,address);
             stn.setString(3,id);
 
-            stn.executeUpdate();
+            if (stn.executeUpdate() !=0){
+                resp.getWriter().write("Customer Updated Success");
+            }else {
+                resp.getWriter().write("Failed to Updated Customer");
+            }
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
