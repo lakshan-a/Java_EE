@@ -22,6 +22,15 @@ public class CustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
 
+       /* String action = req.getParameter("action");
+        if(action == null){
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "action is empty");
+        } else if(action.equalsIgnoreCase("GETALL")){
+            getAllCustomer();
+        }else if (action.equalsIgnoreCase("GETONE")){
+            getCustomerById();
+        }*/
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gdse66_hello", "root", "12345");
