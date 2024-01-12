@@ -1,73 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Finest SuperMarket</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-    <script src="bootstrap/js/bootstrap.bundle.js"></script>
-
+    <title>form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 </head>
-
 <body>
-
-<section class="container-fluid p-0 position-relative bg-danger">
-    <div class="row">
-
-    </div>
-
-    <div class="row position-absolute container-fluid ">
-
-        <div class="col-3"></div>
-
-        <div class="mt-0 col-12 col-sm-6 col-md-5 col-lg-4 col-xl-5  col-xxl-5 ">
-
-            <div>
-
-                <form action="customer" method="post" enctype="text/plain">
-
-                    <h2 style="color: black" class="text-center m-4">Customer Registration</h2>
-
-                    <div class="mb-2">
-                        <label for="id" class="form-label" style="color: black">Customer ID :</label>
-                        <input type="id" class="form-control" id="id" placeholder="C001" name="id">
-                    </div>
-
-                    <div class="mb-2">
-                        <label for="name" class="form-label" style="color: black">Customer Name :</label>
-                        <input type="name" class="form-control" id="name" placeholder="lakshan" name="name">
-                    </div>
-
-                    <div class="mb-2">
-                        <label for="address" class="form-label" style="color: black">Customer Address :</label>
-                        <input type="address" class="form-control" id="address" placeholder="matara" name="address">
-                    </div>
-
-<!--                    <div class="mb-2">-->
-<!--                        <label for="salary" class="form-label" style="color: black">Customer Salary : </label>-->
-<!--                        <input type="salary" class="form-control" id="salary" placeholder="1000.00" name="cusSalary">-->
-<!--                    </div>-->
-
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end my-4">
-                        <button class="btn btn-outline-primary" formmethod="post">Save</button>
-                        <button class="btn btn-outline-primary" >Update</button>
-                        <button class="btn btn-outline-primary" >Delete</button>
-<!--                        <button class="btn btn-outline-primary" type="button">Get All</button>-->
-                    </div>
-
-                </form>
-
-            </div>
-
+<div class="container" style="border-radius : 40px ;
+        background: #afaeae;width: 70vw; margin-top: 10vh; border: 5px solid black;padding: 100px">
+    <form method="post" action="http://localhost:8080/app/test">
+        <div class="mb-3">
+            <label class="form-label">ID</label>
+            <label for="upCID"></label>
+            <input id="upCID" type="text" class="form-control" placeholder="" name="id">
         </div>
 
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Customer Name</label>
+            <label for="upCName"></label><input id="upCName" type="text" class="form-control" placeholder=""
+                                                name="name">
+        </div>
 
-</section>
+        <div class="mb-3">
+            <label class="form-label">Customer address</label>
+            <label for="upCAddress"></label><input id="upCAddress" type="text" class="form-control" placeholder=""
+                                                   name="address">
+        </div>
 
+        <button type="submit" class="btn btn-primary me-4">Add Customer
+        </button>
 
-
+    </form>
+</div>
 </body>
-
 </html>
