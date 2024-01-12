@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Form_Action" target="8" />
+      <module name="Form_Action" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

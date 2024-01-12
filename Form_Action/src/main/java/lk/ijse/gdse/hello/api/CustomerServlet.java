@@ -1,7 +1,10 @@
 package lk.ijse.gdse.hello.api;
 
 import jakarta.json.*;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 import jdk.nashorn.internal.runtime.JSONListAdapter;
+import lk.ijse.gdse.hello.dto.CustomerDto;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,9 +15,9 @@ import java.io.IOException;
 import java.sql.*;
 
 //@WebServlet(name = "Hello_servlet" , value = "/" , loadOnStartup = 1)
-
+//
 @WebServlet(urlPatterns = "/test")
-public class Form_Action extends HttpServlet {
+public class CustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
@@ -26,6 +29,7 @@ public class Form_Action extends HttpServlet {
             ResultSet set = preparedStatement.executeQuery();
 
             while (set.next()){
+
                 JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
                 objectBuilder.add("id",set.getString(1));
                 objectBuilder.add("name",set.getString(2));
@@ -44,6 +48,8 @@ public class Form_Action extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
+
+
 
         String id = req.getParameter("id");
         String name = req.getParameter("name");
@@ -136,9 +142,15 @@ public class Form_Action extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
-        String id = req.getParameter("id");
-        String name = req.getParameter("name");
-        String address = req.getParameter("address");
+//        String id = req.getParameter("id");
+//        String name = req.getParameter("name");
+//        String address = req.getParameter("address");
+
+        Jsonb jsonb = JsonbBuilder.create();
+        CustomerDto customerDto =jsonb.fromJson(req.getReader(),CustomerDto.class);
+        String id = customerDto.getId();
+        String name = customerDto.getName();
+        String address = customerDto.getAddress();
 
 
 

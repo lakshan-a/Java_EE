@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="Java-EE-2-1.0-0.war">
+    <root id="archive" name="Json-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="Form_Action:war exploded" />
     </root>
   </artifact>
