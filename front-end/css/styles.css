@@ -1,0 +1,19 @@
+#content{
+    margin: 2%;
+}
+
+#cus-form{
+    background-color: lightgray;
+    padding: 2%;
+}
+
+#table{
+    background-color: lightslategray;
+    padding: 2%;
+}
+
+label, .form-control, .btn, table{
+    font-size: 0.6rem;
+}
+
+

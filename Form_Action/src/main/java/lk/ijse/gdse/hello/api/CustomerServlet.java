@@ -3,7 +3,7 @@ package lk.ijse.gdse.hello.api;
 import jakarta.json.*;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
-import jdk.nashorn.internal.runtime.JSONListAdapter;
+//import jdk.nashorn.internal.runtime.JSONListAdapter;
 import lk.ijse.gdse.hello.dto.CustomerDto;
 
 import javax.servlet.ServletException;
