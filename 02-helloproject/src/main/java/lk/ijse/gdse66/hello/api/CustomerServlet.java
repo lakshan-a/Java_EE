@@ -142,6 +142,8 @@ public class CustomerServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
 
+        resp.addHeader("Access-control-Allow-origin", "*");
+
         String id = req.getParameter("id");
 
         try {
@@ -207,5 +209,13 @@ public class CustomerServlet extends HttpServlet {
                 }
             }
         }
+    }
+
+    @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.addHeader("Access-control-Allow-origin", "*");
+        resp.addHeader("Access-control-Allow-Headers", "Content-type");
+        resp.addHeader("Access-control-Allow-Methods", "DELETE,PUT");
+
     }
 }
