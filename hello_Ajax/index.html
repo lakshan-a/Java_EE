@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HelloAjax</title>
+
+</head>
+<body>
+
+    <h1>Hello AJAX</h1>
+    <p>Let's implement Ajax with XMLHttpRequest object</p>
+    <button id="btn1" type="button">Send AJAX</button>
+    <button id="btn2" type="button">Send AJAX Request with JQuery</button>
+
+
+    <script src="src/main/resources/jquery/code.jquery.com_jquery-3.7.1.min.js"></script>
+    <script>
+        $('#btn1').click(function () {
+            let xhr = new XMLHttpRequest();
+            console.log(xhr.readyState,"After creating XMLHttpRequest object");
+
+            xhr.open("get","src/main/data/data.json");
+            console.log(xhr.readyState,"After Opening the request");
+
+            xhr.addEventListener("readystatechange", () =>{
+                if (xhr.readyState ==4 && xhr.status ===200){
+                    console.log(xhr.responseText);
+                    let divElm = $('<div>');
+                    divElm.text(xhr.responseText);
+                    $('body').append(divElm);
+
+                }
+                console.log(xhr.readyState,"read stata chang");
+            });
+
+            xhr.send();
+            console.log(xhr.readyState,"After sending the request");
+
+            console.log(xhr.responseText);
+        });
+
+        $('#btn2').click(function () {
+            $.ajax({
+                url : "src/main/data/data.json",
+                method : "GET",
+                /*async: true,*/
+                success : function (resp) {
+                    console.log("success :" +resp.id)
+                },
+                error : function (error) {
+                    console.log("error: " +error);
+                }
+            })
+
+        });
+
+
+    </script>
+
+</body>
+</html>
