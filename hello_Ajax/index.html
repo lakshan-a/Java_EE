@@ -44,10 +44,11 @@
             console.log("Start");
 
             $.ajax({
-                url : "src/main/data/data.json",
+                url : "src/main/dat/data.json",
                 method : "GET",
                 /*async: false,*/
                 success : function (resp) {
+
                     console.log("Success" , resp)
                     console.log("id: " , resp.id);
                     console.log("name: " , resp.name);
@@ -57,8 +58,10 @@
                     divElm.text("id: " + resp.id + ", name: " + resp.name + ", address: " + resp.address);
                     $('body').append(divElm);
                 },
-                error : function (error) {
-                    console.log("error: " , error);
+                error : function (jqxhr,textStatus,error) {
+                    console.log("error-jqxhr:" , jqxhr);
+                    console.log("error-textStatus:" , error);
+                    console.log("error-error:" , error);
                 }
             })
 
