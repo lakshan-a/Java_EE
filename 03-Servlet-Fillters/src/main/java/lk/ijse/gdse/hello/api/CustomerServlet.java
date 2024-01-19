@@ -1,4 +1,4 @@
-package lk.ijse.gdse.hello;
+package lk.ijse.gdse.hello.api;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
