@@ -97,7 +97,7 @@ public class CustomerServlet extends HttpServlet {
             getCustomerById();
         }*/
 
-        resp.addHeader("Access-Control-Allow-Origin","*");
+//        resp.addHeader("Access-Control-Allow-Origin","*");
 
         Connection connection = null;
 
@@ -142,7 +142,7 @@ public class CustomerServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
 
-        resp.addHeader("Access-control-Allow-origin", "*");
+//        resp.addHeader("Access-control-Allow-origin", "*");
 
         String id = req.getParameter("id");
 
