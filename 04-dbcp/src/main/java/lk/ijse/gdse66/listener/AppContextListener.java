@@ -1,21 +1,21 @@
-package lk.ijse.gdse.hello.dbcp;
+package lk.ijse.gdse66.listener;
 
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
+import jakarta.servlet.annotation.WebListener;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 
-
-@WebListener(value = "servletContextListener")
+@WebListener
 public class AppContextListener implements ServletContextListener {
-
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        BasicDataSource dbcp = new BasicDataSource();
+        System.out.println("ServletContext is initialized");
+
+        BasicDataSource dbcp = new BasicDataSource(); //create a connection pool
         dbcp.setUsername("root");
-        dbcp.setPassword("12345");
+        dbcp.setPassword("MYsql@123@");
         dbcp.setUrl("jdbc:mysql://localhost:3306/gdse66_hello");
         dbcp.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dbcp.setInitialSize(2);
@@ -27,7 +27,6 @@ public class AppContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        ServletContextListener.super.contextDestroyed(sce);
+        System.out.println("ServletContext is destroyed");
     }
 }
-
