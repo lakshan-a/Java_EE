@@ -6,18 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="dbcp" />
-      </profile>
-      <profile name="Annotation profile for Unknown" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="wrapper" />
+        <module name="04-dbcp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="dbcp" target="1.8" />
-      <module name="wrapper" target="1.5" />
+      <module name="04-dbcp" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

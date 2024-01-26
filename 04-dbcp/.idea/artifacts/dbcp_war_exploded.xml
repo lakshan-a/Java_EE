@@ -11,7 +11,7 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="dbcp" />
+          <element id="module-output" name="04-dbcp" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: jakarta.servlet:jakarta.servlet-api:6.0.0" />
@@ -26,7 +26,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/dbcp-1.0.0/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="dbcp/web/Web" />
+      <element id="javaee-facet-resources" facet="04-dbcp/web/Web" />
     </root>
   </artifact>
 </component>

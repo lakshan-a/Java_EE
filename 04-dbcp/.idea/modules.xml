@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/dbcp.iml" filepath="$PROJECT_DIR$/dbcp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.mvn/wrapper/wrapper.iml" filepath="$PROJECT_DIR$/.mvn/wrapper/wrapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04-dbcp.iml" filepath="$PROJECT_DIR$/04-dbcp.iml" />
     </modules>
   </component>
 </project>
