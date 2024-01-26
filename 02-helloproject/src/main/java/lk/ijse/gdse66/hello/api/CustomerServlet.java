@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "Customer", urlPatterns = "/customers", loadOnStartup = 1, initParams = {
         @WebInitParam(name = "username" , value = "root"),
-        @WebInitParam(name = "password" , value = "12345"),
+        @WebInitParam(name = "password" , value = "MYsql@123@"),
         @WebInitParam(name = "url" , value = "jdbc:mysql://localhost:3306/gdse66_hello")
 })
 public class CustomerServlet extends HttpServlet {
@@ -34,7 +34,7 @@ public class CustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
 
-        /*resp.addHeader("Access-Control-Allow-Origin", "*");*/
+//        resp.addHeader("Access-Control-Allow-Origin", "*");
 
         Jsonb jsonb = JsonbBuilder.create();
         CustomerDTO customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
@@ -68,6 +68,7 @@ public class CustomerServlet extends HttpServlet {
 
             if (stm.executeUpdate() != 0) {
                 resp.setStatus(HttpServletResponse.SC_CREATED);
+                resp.getWriter().write("Added customer successfully");
             }else {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to save the customer");
             }
@@ -142,7 +143,7 @@ public class CustomerServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
 
-//        resp.addHeader("Access-control-Allow-origin", "*");
+//        resp.addHeader("Access-Control-Allow-Origin","*");
 
         String id = req.getParameter("id");
 
@@ -175,7 +176,7 @@ public class CustomerServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
 
-        resp.addHeader("Access-control-Allow-origin", "*");
+//        resp.addHeader("Access-Control-Allow-Origin","*");
 
         Jsonb jsonb = JsonbBuilder.create();
         CustomerDTO customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
@@ -213,11 +214,10 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
-    @Override
+    /*@Override
     protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.addHeader("Access-control-Allow-origin", "*");
-        resp.addHeader("Access-control-Allow-Headers", "Content-type");
-        resp.addHeader("Access-control-Allow-Methods", "DELETE,PUT");
-
-    }
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
+        resp.addHeader("Access-Control-Allow-Methods", "DELETE, PUT");
+    }*/
 }

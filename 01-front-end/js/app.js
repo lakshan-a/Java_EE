@@ -45,16 +45,20 @@ $('#btnSave').click(function () {
         url: "http://localhost:8080/app/customers",
         method: "POST",
         data: jsonObj,
-        success: function (jqxhr,textStatus,resp) {
+        contentType: "application/json",
+        success: function (resp, textStatus, jqxhr) {
             console.log("success: ", resp);
             console.log("success: ", textStatus);
             console.log("success: ", jqxhr);
-
+            /*if(jqxhr.status == 201)
+                alert("Added customer successfully")*/
+            if (jqxhr.status == 201)
+                alert(jqxhr.responseText);
         },
-        error: function (jqxhr,textStatus,error) {
-            console.log("error: ", error);
+        error: function (jqxhr, textStatus, error) {
             console.log("error: ", jqxhr);
             console.log("error: ", textStatus);
+            console.log("error: ", error);
         }
     })
 });
@@ -63,26 +67,22 @@ $('#btnDelete').click(function () {
     const id = $('#txt-id').val();
 
     $.ajax({
-        url: "http://localhost:8080/app/customers?id=" +id,
+        url: "http://localhost:8080/app/customers?id=" + id,
         method: "DELETE",
-        success: function (jqxhr,textStatus,resp) {
+        success: function (resp, textStatus, jqxhr) {
             console.log("success: ", resp);
             console.log("success: ", textStatus);
             console.log("success: ", jqxhr);
-
         },
-        error: function (jqxhr,textStatus,error) {
-            console.log("error: ", error);
-            console.log("error: ", textStatus);
+        error: function (jqxhr, textStatus, error) {
             console.log("error: ", jqxhr);
+            console.log("error: ", textStatus);
+            console.log("error: ", error);
         }
     })
 });
 
-
 $('#btnUpdate').click(function () {
-
-
     const id = $('#txt-id').val();
     const name = $('#txt-name').val();
     const address = $('#txt-address').val();
@@ -99,16 +99,17 @@ $('#btnUpdate').click(function () {
         url: "http://localhost:8080/app/customers",
         method: "PUT",
         data: jsonObj,
-        success: function (jqxhr,textStatus,resp) {
+        contentType: "application/json",
+        success: function (resp, textStatus, jqxhr) {
             console.log("success: ", resp);
             console.log("success: ", textStatus);
             console.log("success: ", jqxhr);
-
         },
-        error: function (jqxhr,textStatus,error) {
-            console.log("error: ", error);
+        error: function (jqxhr, textStatus, error) {
             console.log("error: ", jqxhr);
             console.log("error: ", textStatus);
+            console.log("error: ", error);
         }
     })
 });
+

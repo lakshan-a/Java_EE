@@ -16,10 +16,10 @@ public class CustomerServlet extends HttpServlet {
         System.out.println("Filter");
 
 
-        System.out.println("CORSFilter");
-        System.out.println("CORSFilter: dispatch to the next filter/servlet");
-        chain.doFilter(req,res);
-
-        System.out.println("CORSFilter : outgoing Response");
+//        System.out.println("CORSFilter");
+//        System.out.println("CORSFilter: dispatch to the next filter/servlet");
+//        chain.doFilter(req,res);
+//
+//        System.out.println("CORSFilter : outgoing Response");
     }
 }
