@@ -3,6 +3,7 @@ package lk.ijse.gdse66.hello.api;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import lk.ijse.gdse66.hello.dto.CustomerDTO;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -11,30 +12,26 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
-@WebServlet(name = "Customer", urlPatterns = "/customers", loadOnStartup = 1, initParams = {
-        @WebInitParam(name = "username" , value = "root"),
-        @WebInitParam(name = "password" , value = "12345"),
-        @WebInitParam(name = "url" , value = "jdbc:mysql://localhost:3306/gdse66_hello")
-})
+@WebServlet(name = "Customer", urlPatterns = "/customers", loadOnStartup = 1)
+
 public class CustomerServlet extends HttpServlet {
     private String username;
     private String password;
     private String url;
 
+    BasicDataSource pool;
+
     @Override
     public void init() throws ServletException {
-        /*ServletConfig is used to get configuration information such as database url, mysql username and password*/
-        ServletConfig sc = getServletConfig();
-        username = sc.getInitParameter("username");
-        password = sc.getInitParameter("password");
-        url = sc.getInitParameter("url");
+
+        ServletContext sc = getServletContext();
+        pool = (BasicDataSource) sc.getAttribute("dbcp");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection connection = null;
+//        Connection connection = null;
 
-//        resp.addHeader("Access-Control-Allow-Origin", "*");
 
         Jsonb jsonb = JsonbBuilder.create();
         CustomerDTO customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
@@ -57,9 +54,7 @@ public class CustomerServlet extends HttpServlet {
         System.out.printf("id=%s, name=%s, address=%s\n", id,name,address);
 
         /*create a database connection and save data in database*/
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url,username,password);
+        try (Connection connection =pool.getConnection()){
             PreparedStatement stm = connection.prepareStatement("INSERT INTO customer(id, name, address) VALUES (?,?,?)");
 
             stm.setString(1,id);
@@ -74,9 +69,10 @@ public class CustomerServlet extends HttpServlet {
             }
 
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        }
+        /*finally {
             if(connection !=null) {
                 try {
                     connection.close();
@@ -84,7 +80,7 @@ public class CustomerServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
             }
-        }
+        }*/
     }
 
     @Override
@@ -100,12 +96,9 @@ public class CustomerServlet extends HttpServlet {
 
 //        resp.addHeader("Access-Control-Allow-Origin","*");
 
-        Connection connection = null;
 
         /*create a database connection and fetch data in database*/
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url,username,password);
+        try (Connection connection =pool.getConnection()){
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM customer");
             ResultSet rst = stm.executeQuery();
 
@@ -126,30 +119,19 @@ public class CustomerServlet extends HttpServlet {
             jsonb.toJson(customerList,resp.getWriter());
 
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
-            if(connection !=null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
         }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection connection = null;
 
 //        resp.addHeader("Access-Control-Allow-Origin","*");
 
         String id = req.getParameter("id");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url, username, password);
+        try (Connection connection =pool.getConnection()){
             PreparedStatement stm = connection.prepareStatement("DELETE FROM customer WHERE id=?");
             stm.setString(1,id);
 
@@ -158,24 +140,14 @@ public class CustomerServlet extends HttpServlet {
             }else{
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to delete the customer!");
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally{
-            if(connection != null){
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
         }
+
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection connection = null;
-
 //        resp.addHeader("Access-Control-Allow-Origin","*");
 
         Jsonb jsonb = JsonbBuilder.create();
@@ -186,9 +158,7 @@ public class CustomerServlet extends HttpServlet {
 
         System.out.printf("id=%s, name=%s, address=%s\n", id,name,address);
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url,username,password);
+        try (Connection connection =pool.getConnection()){
             PreparedStatement stm = connection.prepareStatement("UPDATE customer SET name=?, address=? WHERE id=?");
 
             stm.setString(1, name);
@@ -201,16 +171,8 @@ public class CustomerServlet extends HttpServlet {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update the customer");
             }
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
-            if(connection !=null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
         }
     }
 
