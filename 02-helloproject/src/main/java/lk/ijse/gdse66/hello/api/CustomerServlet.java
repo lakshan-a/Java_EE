@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "Customer", urlPatterns = "/customers", loadOnStartup = 1, initParams = {
         @WebInitParam(name = "username" , value = "root"),
-        @WebInitParam(name = "password" , value = "MYsql@123@"),
+        @WebInitParam(name = "password" , value = "12345"),
         @WebInitParam(name = "url" , value = "jdbc:mysql://localhost:3306/gdse66_hello")
 })
 public class CustomerServlet extends HttpServlet {
