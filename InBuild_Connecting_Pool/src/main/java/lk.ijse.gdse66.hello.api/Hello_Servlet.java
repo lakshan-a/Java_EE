@@ -16,10 +16,14 @@ import java.sql.SQLException;
 
 @WebServlet(urlPatterns = "/customer")
 public class Hello_Servlet extends HttpServlet {
+
    @Override
    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      System.out.println("Hello");
 
+   }
+
+   @Override
+   public void init() throws ServletException {
       try {
          InitialContext ic = new InitialContext();
          DataSource pool = (DataSource) ic.lookup("java:/comp/env/jdbc/pos");
